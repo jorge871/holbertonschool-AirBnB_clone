@@ -1,6 +1,7 @@
 <h1>Project of AirBnB - Console</h1>
 
-<h2>Description: this is our project about the airbn clone, it will be used to implement on our server a simple copy of the AirBnB website, it will not implement all its functions, just some of them to cover all the fundamental concepts of higher level programming.</h2>
+<h3>Description:
+this is our project about the airbn clone, it will be used to implement on our server a simple copy of the AirBnB website, it will not implement all its functions, just some of them to cover all the fundamental concepts of higher level programming.</h3>
 
 This project will contain the following requirements and files:
 ```

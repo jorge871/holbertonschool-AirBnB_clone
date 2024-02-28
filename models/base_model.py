@@ -4,12 +4,13 @@ from datetime import datetime
 import uuid
 import models
 
+
 class BaseModel():
-    """create class that will be inherited by the other classes in this project"""
+    """create class that will inherited by the other classes in this project"""
     def __init__(self, *args, **kwargs):
         """Initialize new basemodel"""
 
-        self.id = 
+        self.id = uuid
         self.created_at = datetime
         self.updated_at = datetime
 
@@ -19,4 +20,3 @@ class BaseModel():
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of __dict__"""
-

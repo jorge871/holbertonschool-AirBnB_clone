@@ -13,6 +13,16 @@ class BaseModel():
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
+        if not kwargs:
+            pass
+        else:
+            for key, value in kwargs.items():
+                if key != "__class__":
+                    setattr(self, key, value)
+            if "created_at" in kwargs:
+                self.created_at = datetime.strptime(kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
+            if "updated_at" in kwargs:
+                self.updated_at = datetime.strptime(kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
 
     def __str__(self):
         """ this is a representation of string"""
@@ -30,6 +40,6 @@ class BaseModel():
         """returns a dictionary containing all keys/values of __dict__"""
         data = self.__dict__.copy()
         data["created_at"] = self.created_at.isoformat()
-        data["updated_at"] = self.updated_at.isoformat() 
+        data["updated_at"] = self.updated_at.isoformat()
         data["__class__"] = self.__class__.__name__
         return data

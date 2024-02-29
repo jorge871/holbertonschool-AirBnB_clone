@@ -15,7 +15,11 @@ class BaseModel():
 
     def __str__(self):
         """ this is a representation of string"""
-        return ("[{}] ({}) <{}>".format(self.__class__.__name__, self.id, self.__dict__))
+        return ("[{}] ({}) {}".format(
+            self.__class__.__name__,
+            self.id,
+            self.__dict__
+            ))
 
     def save(self):
         """updates the public instance attribute updated_at"""
@@ -23,11 +27,8 @@ class BaseModel():
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of __dict__"""
-        return {
-            "my_number": self.my_number,
-            "name": self.name,
-            "__class__": self.__class__.__name__,
-            "updated_at": self.updated_at,
-            "id": self.id,
-            "created_at": self.created_at
-        }
+        data = self.__dict__copy()
+        data["created_at"] = self.created_at.isoformat()
+        data["updated_at"] = self.updated_at.isoformat() 
+        data["__class__"] = self.__class__.__name__
+        return data

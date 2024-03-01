@@ -16,11 +16,11 @@ class FileStorage():
     def new(self, obj):
         """Assigns to the object in the '__objects' set the value
         specified by the key '<object class name>.id'"""
-        self.__objects [f"{obj.__class__.__name__}.{obj.id}"] = obj
+        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """serialized a objects to file json"""
-        with open(self.__file_path, "w", encoding="utf-8") as file:
+        with open(self.__file_path, "w") as file:
             json.dump({key: value.to_dict() if hasattr(value, 'to_dict') else value for key, value in self.__objects.items()}, file)
 
     def reload(self):

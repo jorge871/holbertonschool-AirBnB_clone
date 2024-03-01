@@ -12,12 +12,7 @@ class BaseModel():
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        models.storage.new(self)
-
-        if not kwargs:
-            pass
-
-        else:
+        if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
                     setattr(self, key, value)
@@ -27,6 +22,9 @@ class BaseModel():
             if "updated_at" in kwargs:
                 self.updated_at = datetime.strptime(kwargs["updated_at"],
                                                     "%Y-%m-%dT%H:%M:%S.%f")
+        else:
+            models.storage.new(self)
+
 
     def __str__(self):
         """ this is a representation of string"""

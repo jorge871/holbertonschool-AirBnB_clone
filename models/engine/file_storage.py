@@ -28,5 +28,7 @@ class FileStorage():
         try:
             with open(self.__file_path, "r", encoding="utf-8") as file:
                 self.__objects = json.load(file)
-        except Exception:
+        except FileNotFoundError:
             pass
+        except Exception as e:
+            print(e)

@@ -2,6 +2,8 @@
 """entry point of the command interpreter"""
 import cmd
 import models
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class HBNBConsole(cmd.Cmd):
@@ -26,8 +28,10 @@ class HBNBConsole(cmd.Cmd):
             print("** class name missing **")
             return
         try:
-            new_instance = eval(arg)()
-            new.instance.save()
+            class_name = arg.split()[0]
+            class_obj = getattr(models, class_name)
+            new_instance = class_obj()
+            new_instance.save()
             print(new_instance.id)
         except NameError:
             print("** class doesn't exist **")
@@ -38,7 +42,9 @@ class HBNBConsole(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-        if args[0] not in storage.classes.keys():
+        all_objects = storage.all()
+        class_name = args[0]
+        if class_name not in all_objects.keys():
             print("** class doesn't exist **")
             return
         if len(args) == 1:
@@ -57,7 +63,9 @@ class HBNBConsole(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-        if args[0] not in storage.classes.keys():
+        all_objects = storage.all()
+        class_name = args[0]
+        if class_name not in all_objects.keys():
             print("** class doesn't exist **")
             return
         if len(args) == 1:
@@ -77,7 +85,7 @@ class HBNBConsole(cmd.Cmd):
         all_objects = storage.all()
         if len(args) == 0:
             print([str(value) for value in all_objects.values()])
-        elif args[0] not in storage.classes.keys():
+        elif args[0] not in all_objects.keys():
             print("** class doesn't exist **")
         else:
             print(

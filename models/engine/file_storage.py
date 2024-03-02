@@ -1,4 +1,4 @@
-!/usr/bin/python3
+#!/usr/bin/python3
 """ create file storage class """
 import json
 from models.base_model import *

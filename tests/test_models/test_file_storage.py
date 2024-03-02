@@ -3,18 +3,19 @@
 import unittest
 import json
 from models.base_model import BaseModel
-from models.engine.file_storage import *
+from models.engine.file_storage import FileStorage
 
 
 class TestFileStorage(unittest.TestCase):
     """ class to test the File Storage methods """
     def setUp(self):
         self.storage = FileStorage()
-        self.storage.reload()
 
     def test_if_variable_path_exists(self):
         """ check if path variable exists in the class """
-        self.assertEqual(self.storage._FileStorage__file_path, "file.json")
+        self.assertEqual(
+            getattr(self.storage, '_FileStorage__file_path'), "file.json")
+        self.assertIsInstance(self.storage.all(), dict)
 
     def test_if_variable_objects_exists(self):
         """ check if objects variable is initialized as empty dictionary """

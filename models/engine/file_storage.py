@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 """ create file storage class """
 import json
-from models import *
+from models.base_model import *
 
 
 class FileStorage():
     """this is the class to handle the file operations of our
     interpreter"""
-    __file_path = "file.json"
-    __objects = {}
+    def __init__(self):
+        """def init"""
+        __file_path = "file.json"
+        __objects = {}
 
     def all(self):
         """return a dictionary with all objects in memory"""
@@ -32,7 +34,6 @@ class FileStorage():
                 data = json.load(file)
                 for key, value in data.items():
                     obj_class = value["__class__"]
-                    del value["__class__"]
                     self.__objects[key] = eval(obj_class)(**value)
-        except FileNotFoundError:
+        except Exception as e:
             pass

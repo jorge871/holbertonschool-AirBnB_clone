@@ -10,6 +10,7 @@ class TestFileStorage(unittest.TestCase):
     """ class to test the File Storage methods """
     def setUp(self):
         self.storage = FileStorage()
+        self.storage.reload()
 
     def test_if_variable_path_exists(self):
         """ check if path variable exists in the class """

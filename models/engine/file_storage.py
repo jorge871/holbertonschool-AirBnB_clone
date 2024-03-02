@@ -10,6 +10,10 @@ class FileStorage():
     __file_path = "file.json"
     __objects = {}
 
+    def __init__(self):
+        """reload"""
+        self.reload()
+
     def all(self):
         """return a dictionary with all objects in memory"""
         return self.__objects
@@ -17,7 +21,9 @@ class FileStorage():
     def new(self, obj):
         """Assigns to the object in the '__objects' set the value
         specified by the key '<object class name>.id'"""
-        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        if obj is not None:
+            FileStorage.__objects[obj.id] = obj
+        """FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj"""
 
     def save(self):
         """serialized a objects to file json"""

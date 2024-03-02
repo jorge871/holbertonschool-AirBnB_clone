@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """entry point of the command interpreter"""
 import cmd
-import models
-from base_model import BaseModel
+from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
@@ -29,7 +28,7 @@ class HBNBConsole(cmd.Cmd):
             return
         try:
             class_name = arg.split()[0]
-            class_obj = getattr(models, class_name)
+            class_obj = getattr(models.base_model, class_name)
             new_instance = class_obj()
             new_instance.save()
             print(new_instance.id)

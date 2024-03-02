@@ -32,11 +32,19 @@ class FileStorage():
             """json.dump({key: value.to_dict() if hasattr(value, 'to_dict') else value for key, value in self.__objects.items()}, f)"""
 
     def reload(self):
-        """deserializes a objects to file json"""
+        """Deserializes objects from a JSON file"""
         try:
             with open(self.__file_path, "r", encoding="utf-8") as f:
+                self.__objects = {}
                 data = json.load(f)
-                for key, value in data.items():
-                    self.__objects[key] = eval(f"{value['_class__']}(**{value})")
+                for key in data.keys():
+                    cls_name = data[key].pop("__class__", None)
+                    created_at = data[key].pop("created_at", None)
+                    updated_at = data[key].pop("updated_at", None)
+                    if created_at:
+                        created_at = datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%S.%f")
+                    if updated_at:
+                        updated_at = datetime.strptime(updated_at, "%Y-%m-%dT%H:%M:%S.%f")
+                    self.__objects[key] = eval(f"{cls_name}(**data[key])")
         except Exception:
             pass

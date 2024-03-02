@@ -22,12 +22,12 @@ class FileStorage():
         """Assigns to the object in the '__objects' set the value
         specified by the key '<object class name>.id'"""
         if obj is not None:
-            FileStorage.__objects[obj.id] = obj
-        """FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj"""
+            """FileStorage.__objects[obj.id] = obj"""
+        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """serialized a objects to file json"""
-        with open(self.__file_path, "w") as f:
+        with open(self.__file_path, "w", encoding="utf-8") as f:
             json.dump({key: value.to_dict() for key, value in self.__objects.items()}, f)
             """json.dump({key: value.to_dict() if hasattr(value, 'to_dict') else value for key, value in self.__objects.items()}, f)"""
 
@@ -37,7 +37,6 @@ class FileStorage():
             with open(self.__file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 for key, value in data.items():
-                    obj_class = value["__class__"]
-                    self.__objects[key] = eval(obj_class)(**value)
+                    self.__objects[key] = eval(f"{value['_class__']}(**{value})")
         except Exception:
             pass

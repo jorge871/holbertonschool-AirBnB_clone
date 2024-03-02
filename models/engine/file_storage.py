@@ -22,8 +22,7 @@ class FileStorage():
         """Assigns to the object in the '__objects' set the value
         specified by the key '<object class name>.id'"""
         if obj is not None:
-            FileStorage.__objects[obj.id] = obj
-        """FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj"""
+        FileStorage.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
         """serialized a objects to file json"""

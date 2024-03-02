@@ -34,7 +34,7 @@ class FileStorage():
     def reload(self):
         """Deserializes objects from a JSON file"""
         try:
-            with open(self.__file_path, "r", encoding="utf-8") as f:
+            with open(self.__file_path, "r+", encoding="utf-8") as f:
                 self.__objects = {}
                 data = json.load(f)
                 for key in data.keys():

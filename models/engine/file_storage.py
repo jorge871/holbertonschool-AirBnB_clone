@@ -7,10 +7,8 @@ from models.base_model import *
 class FileStorage():
     """this is the class to handle the file operations of our
     interpreter"""
-    def __init__(self):
-        """def init"""
-        __file_path = "file.json"
-        __objects = {}
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """return a dictionary with all objects in memory"""

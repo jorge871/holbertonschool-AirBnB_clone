@@ -42,6 +42,7 @@ class TestFileStorage(unittest.TestCase):
         with open(self.storage._FileStorage__file_path, "r") as file:
                 data_saved = json.load(file)
         obj_two = f"{obj.__class__.__name__}.{obj.id}"
+
         self.assertIn(obj_two, data_saved)
         self.assertEqual(data_saved[obj_two], obj.to_dict())
 
@@ -50,13 +51,13 @@ class TestFileStorage(unittest.TestCase):
         obj = BaseModel()
         self.storage.new(obj)
         self.storage.save()
+
         self.storage.reload()
-
         obj_two = f"{obj.__class__.__name__}.{obj.id}"
-        self.assertIn(obj_two, self.storage._FileStorage__objects)
 
-        reload_obj = self.storage._FileStorage__objects[obj_two]
-        self.assertEqual(reload_obj.__dict__, obj.__dict__)
+        self.assertIn(obj_two, self.storage._FileStorage__objects)
+        self.assertEqual(
+            self.storage._FileStoragere__objects[obj_two].__dict__, obj.__dict__)
 
     def test_if_path_exist(self):
         """ check if exist a path """
@@ -68,6 +69,10 @@ class TestFileStorage(unittest.TestCase):
         storage.all().clear()
         storage.reload()
         self.assertFalse(len(storage.all()) < 0)
+
+        """Adding test"""
+
+
 
 if __name__ == '__main__':
     unittest.main()

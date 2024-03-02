@@ -41,10 +41,6 @@ class FileStorage():
                     cls_name = data[key].pop("__class__", None)
                     created_at = data[key].pop("created_at", None)
                     updated_at = data[key].pop("updated_at", None)
-                    if created_at:
-                        created_at = datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%S.%f")
-                    if updated_at:
-                        updated_at = datetime.strptime(updated_at, "%Y-%m-%dT%H:%M:%S.%f")
                     self.__objects[key] = eval(f"{cls_name}(**data[key])")
         except Exception:
             pass

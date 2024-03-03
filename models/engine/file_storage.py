@@ -43,6 +43,7 @@ class FileStorage():
                 for key, obj in data.items():
                     class_name = key.split(".")[0]
                     if class_name in FileStorage.classes:
+                        key = class_name + "." + obj_id
                         self.__objects[key] = self.classes[class_name](**obj)
                     """
                     obj_class = obj['__class__']

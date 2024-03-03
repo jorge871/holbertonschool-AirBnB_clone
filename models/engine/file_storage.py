@@ -42,10 +42,6 @@ class FileStorage():
                 data = json.load(f)
                 for key, obj in data.items():
                     class_name, obj_id = key.split(".")
-                    obj_class = globals().get(class_name)
-                    if obj_class:
-                        FileStorage.__objects[key] = obj_class(**obj)
-                    """
                     obj_class = obj['__class__']
                     if obj_class in FileStorage.classes.keys():
                         existing_obj = FileStorage.__objects.get(key)

@@ -41,11 +41,10 @@ class FileStorage():
             with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 for key, obj in data.items():
-                    class_name, _, obj_id = key.partition(".")
-                    if class_name in FileStorage.classes:
-                        if obj_id:
-                            key = class_name + "." + obj_id
-                            self.__objects[key] = self.classes[class_name](**obj)
+                    class_name, obj_id = key.split(".")
+                    obj_class = globals().get(class_name)
+                    if obj_class:
+                        FileStorage.__objects[key] = obj_class(**obj)
                     """
                     obj_class = obj['__class__']
                     if obj_class in FileStorage.classes.keys():

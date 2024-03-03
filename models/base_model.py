@@ -13,7 +13,6 @@ class BaseModel():
         self.updated_at = datetime.now()
 
         from models import storage
-        storage.new(self)
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
@@ -37,6 +36,8 @@ class BaseModel():
         """updates the public instance attribute updated_at"""
         from models import storage
         self.updated_at = datetime.now()
+        if self not in storage.all().values():
+            storage.new(self)
         storage.save()
 
     def to_dict(self):

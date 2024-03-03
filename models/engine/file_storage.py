@@ -43,6 +43,7 @@ class FileStorage():
                 for key, obj in data.items():
                     obj_class = obj['__class__']
                     if obj_class in FileStorage.classes.keys():
-                        FileStorage.__objects[key] = self.classes[obj_class](**obj)
+                        temp = self.classes[obj_class](**obj)
+                        FileStorage.__objects[key] = temp
         except FileNotFoundError:
             pass

@@ -46,9 +46,25 @@ class FileStorage():
                     if obj_class in FileStorage.classes.keys():
                         existing_obj = FileStorage.__objects.get(key)
                         if existing_obj:
+                            for attr, value in obj.items():
+                                setattr(existing_obj, attr, value)
+                        else:
+                            temp = self.classes[obj_class](**obj)
+                            FileStorage.__objects[key] = temp
+        """
+        try:
+            with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                for key, obj in data.items():
+                    class_name = key.split(".")[0]
+                    obj_class = obj['__class__']
+                    if obj_class in FileStorage.classes.keys():
+                        existing_obj = FileStorage.__objects.get(key)
+                        if existing_obj:
                             existing_obj.__dict__.update(obj)
                         else:
                             temp = self.classes[obj_class](**obj)
                             FileStorage.__objects[key] = temp
+                            """
         except FileNotFoundError:
             pass

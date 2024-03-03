@@ -41,7 +41,7 @@ class FileStorage():
             with open(self.__file_path, "r") as f:
                 data = json.load(f)
             for key in data:
-                self.__objects[key] = classes[data[key]["__class__"]](**data[key])
+                self.__objects[key] = FileStorage.classes[data[key]["__class__"]](**data[key])
             """with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 for key, obj in data.items():

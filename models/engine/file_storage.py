@@ -2,7 +2,6 @@
 """ create file storage class """
 import json
 from models.base_model import BaseModel
-from models.user import User
 
 
 class FileStorage():
@@ -38,18 +37,5 @@ class FileStorage():
                 class_name, obj_id = key.split(".")
                 obj = globals()[class_name](**value)
                 self.__objects[key] = obj
-            """with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                for key, obj in data.items():
-                    class_name = key.split(".")[0]
-                    obj_class = obj['__class__']
-                    if obj_class in FileStorage.classes.keys():
-                        existing_obj = FileStorage.__objects.get(key)
-                        if existing_obj:
-                            for attr, value in obj.items():
-                                setattr(existing_obj, attr, value)
-                        else:
-                            temp = self.classes[obj_class](**obj)
-                            FileStorage.__objects[key] = temp"""
         except FileNotFoundError:
             pass

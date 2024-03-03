@@ -41,6 +41,10 @@ class FileStorage():
             with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
                 for key, obj in data.items():
+                    class_name = key.split(".")[0]
+                    if class_name in FileStorage.classes:
+                        self.__objects[key] = self.classes[class_name](**obj)
+                    """
                     obj_class = obj['__class__']
                     if obj_class in FileStorage.classes.keys():
                         existing_obj = FileStorage.__objects.get(key)
@@ -49,5 +53,6 @@ class FileStorage():
                         else:
                             temp = self.classes[obj_class](**obj)
                             FileStorage.__objects[key] = temp
+                            """
         except FileNotFoundError:
             pass

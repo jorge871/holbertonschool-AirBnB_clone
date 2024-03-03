@@ -58,7 +58,7 @@ class TestFileStorage(unittest.TestCase):
 
         self.assertIn(obj_two, self.storage._FileStorage__objects)
         self.assertEqual(
-            self.storage._FileStoragere__objects[obj_two].__dict__, obj.__dict__)
+            self.storage._FileStorage__objects[obj_two].__dict__, obj.__dict__)
 
     def test_if_path_exist(self):
         """ check if exist a path """

@@ -50,6 +50,5 @@ class FileStorage():
                         else:
                             temp = self.classes[obj_class](**obj)
                             FileStorage.__objects[key] = temp
-                            """
         except FileNotFoundError:
             pass

@@ -36,12 +36,15 @@ class HBNBConsole(cmd.Cmd):
             return
         try:
             class_name = arg.split()[0]
-            class_obj = getattr(models.base_model, class_name)
+            if class_name not in self.storage.classes:
+                print("** class doesn't exist **")
+                return
+            class_obj = self.storage.classes[class_name]
             new_instance = class_obj()
             new_instance.save()
             print(new_instance.id)
-        except NameError:
-            print("** class doesn't exist **")
+        except Exception as e:
+            print(e)
 
     def do_show(self, arg):
         """Prints the string representation of an instance"""

@@ -2,6 +2,7 @@
 """ create file storage class """
 import json
 from models.base_model import BaseModel
+from models.user import User
 import os.path
 
 
@@ -10,6 +11,11 @@ class FileStorage():
     interpreter"""
     __file_path = "file.json"
     __objects = {}
+
+    classes = {
+            "BaseModel": BaseModel,
+            "User": User
+            }
 
     def all(self):
         """return a dictionary with all objects in memory"""

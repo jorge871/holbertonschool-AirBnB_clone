@@ -24,7 +24,6 @@ class BaseModel():
                 self.updated_at = datetime.strptime(kwargs["updated_at"],
                                                     "%Y-%m-%dT%H:%M:%S.%f")
 
-
     def __str__(self):
         """ this is a representation of string"""
         return ("[{}] ({}) {}".format(

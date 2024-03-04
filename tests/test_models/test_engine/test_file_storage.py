@@ -51,7 +51,7 @@ class TestFileStorage(unittest.TestCase):
         """ check if load data of json file """
         obj = BaseModel()
         self.storage.new(obj)
-        self.storage.save()
+        self.storage.save(obj)
 
         self.storage.reload()
         obj_two = "{}.{}".format(__class__.__name__), (obj.id)

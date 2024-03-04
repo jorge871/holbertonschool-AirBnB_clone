@@ -88,10 +88,10 @@ class HBNBConsole(cmd.Cmd):
             print("** instance id missing **")
             return
         key = args[0] + "." + args[1]
-        if key not in self.model_classes:
+        if key not in storage.all():
             print("** no instance found **")
             return
-        del self.all_objects[key]
+        del storage.all()[key]
         self.storage.save()
 
     def do_all(self, arg):

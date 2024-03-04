@@ -2,14 +2,28 @@
 """entry point of the command interpreter"""
 import cmd
 from models.base_model import BaseModel
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 from models.engine.file_storage import FileStorage
-import models
-import json
+
 
 
 class HBNBConsole(cmd.Cmd):
     """create the console prompt"""
     prompt = "(hbnb) "
+    model_classes = {
+            "BaseModel",
+            "Amenity",
+            "City",
+            "Place",
+            "Review",
+            "State",
+            "User"
+            }
 
     def __init__(self):
         super().__init__()
@@ -112,16 +126,21 @@ class HBNBConsole(cmd.Cmd):
         if len(args) == 3:
             print("** value missing **")
             return
-        if args[0] not in self.storage.classes.keys():
+        class_name = args[0]
+        if class_name not in self.storage.classes.keys():
             print("** class doesn't exist **")
             return
         key = args[0] + "." + args[1]
         if key not in self.all_objects:
             print("** no instance found **")
             return
-        setattr(self.all_objects[key], args[2], args[3])
-        self.storage.save()
-
+        obj = self.all_objects[key]
+        attribute_name = args[2]
+        if hasattr(obj, attribute_name):
+            setattr(obj, attribute_name, args[3])
+            self.storage.save()
+        else:
+            print("** attribute doesn't exist **")
 
 if __name__ == "__main__":
     HBNBConsole().cmdloop()

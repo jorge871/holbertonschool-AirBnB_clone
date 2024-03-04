@@ -9,6 +9,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 from models.engine.file_storage import FileStorage
+from models import storage
 
 
 
@@ -103,12 +104,12 @@ class HBNBConsole(cmd.Cmd):
         """Prints all string representation of all instances"""
         args = arg.split()
         if len(args) == 0:
-            print([str(value) for value in self.all_objects.values()])
-        elif args[0] not in self.all_objects.keys():
+            print([str(value) for value in storage.all().values()])
+        elif args[0] not in self.model_classes:
             print("** class doesn't exist **")
         else:
             print(
-                    [str(value) for key, value in self.all_objects.items()
+                    [str(value) for key, value in storage.all().items()
                         if key.startswith(args[0])])
 
     def do_update(self, arg):

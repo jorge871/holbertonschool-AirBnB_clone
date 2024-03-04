@@ -53,10 +53,9 @@ class HBNBConsole(cmd.Cmd):
             if class_name not in self.model_classes:
                 print("** class doesn't exist **")
                 return
-            class_obj = self.all_objects[class_name]
+            class_obj = model_classes[class_name]
             new_instance = class_obj()
             new_instance.save()
-            self.all_objects = self.storage.all()
             print(new_instance.id)
         except Exception as e:
             print(e)

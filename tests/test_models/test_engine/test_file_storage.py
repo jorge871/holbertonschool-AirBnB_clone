@@ -54,7 +54,7 @@ class TestFileStorage(unittest.TestCase):
         self.storage.save()
 
         self.storage.reload()
-        obj_two = f"{obj.__class__.__name__}.{obj.id}"
+        obj_two = "{}.{}".format(__class__.__name__), (obj.id)
 
         self.assertIn(obj_two, self.storage._FileStorage__objects)
         self.assertEqual(

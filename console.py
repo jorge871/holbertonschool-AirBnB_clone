@@ -88,7 +88,7 @@ class HBNBConsole(cmd.Cmd):
             print("** instance id missing **")
             return
         key = args[0] + "." + args[1]
-        if key not in self.all_objects:
+        if key not in self.model_classes:
             print("** no instance found **")
             return
         del self.all_objects[key]

@@ -50,10 +50,10 @@ class HBNBConsole(cmd.Cmd):
             return
         try:
             class_name = arg.split()[0]
-            if class_name not in self.storage.classes:
+            if class_name not in self.all_objects:
                 print("** class doesn't exist **")
                 return
-            class_obj = self.storage.classes[class_name]
+            class_obj = self.all_objects[class_name]
             new_instance = class_obj()
             new_instance.save()
             print(new_instance.id)
@@ -67,7 +67,7 @@ class HBNBConsole(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in self.all_objects.keys():
+        if class_name not in self.all_objects:
             print("** class doesn't exist **")
             return
         if len(args) == 1:

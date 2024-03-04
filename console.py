@@ -12,7 +12,6 @@ from models.engine.file_storage import FileStorage
 from models import storage
 
 
-
 class HBNBConsole(cmd.Cmd):
     """create the console prompt"""
     prompt = "(hbnb) "
@@ -142,6 +141,7 @@ class HBNBConsole(cmd.Cmd):
             self.storage.save()
         else:
             print("** attribute doesn't exist **")
+
 
 if __name__ == "__main__":
     HBNBConsole().cmdloop()

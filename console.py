@@ -25,12 +25,6 @@ class HBNBConsole(cmd.Cmd):
             "User": User
             }
 
-    def __init__(self):
-        super().__init__()
-        self.storage = FileStorage()
-        self.storage.reload()
-        self.all_objects = self.storage.all()
-
     def emptyline(self):
         """an empty line + ENTER shouldn't execute anything"""
         pass
@@ -74,10 +68,10 @@ class HBNBConsole(cmd.Cmd):
             print("** instance id missing **")
             return
         key = args[0] + "." + args[1]
-        if key not in self.all_objects:
+        if key not in storage.all():
             print("** no instance found **")
             return
-        print(self.all_objects[key])
+        print(storage.all()[key])
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""

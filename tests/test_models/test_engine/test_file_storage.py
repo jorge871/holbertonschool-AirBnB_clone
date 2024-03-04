@@ -30,7 +30,7 @@ class TestFileStorage(unittest.TestCase):
         """ check if added the new object into the objects list and save it """
         obj = BaseModel()
         self.storage.new(obj)
-        obj_two = f"{obj.__class__.__name__}.{obj.id}"
+        obj_two = "{}.{}".format(__class__.__name__), (obj.id)
         self.assertIn(obj_two, self.storage._FileStorage__objects)
         self.assertEqual(self.storage._FileStorage__objects[obj_two], obj)
 
@@ -42,7 +42,7 @@ class TestFileStorage(unittest.TestCase):
 
         with open(self.storage._FileStorage__file_path, "r") as file:
                 data_saved = json.load(file)
-        obj_two = f"{obj.__class__.__name__}.{obj.id}"
+        obj_two = "{}.{}".format(__class__.__name__), (obj.id)
 
         self.assertIn(obj_two, data_saved)
         self.assertEqual(data_saved[obj_two], obj.to_dict())

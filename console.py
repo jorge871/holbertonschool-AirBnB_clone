@@ -26,11 +26,6 @@ class HBNBConsole(cmd.Cmd):
             "User": User
             }
 
-    def __init__(self):
-        super().__init__()
-        self.storage = FileStorage()
-        self.storage.reload()
-
     def emptyline(self):
         """an empty line + ENTER shouldn't execute anything"""
         pass

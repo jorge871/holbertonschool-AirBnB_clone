@@ -16,13 +16,13 @@ class HBNBConsole(cmd.Cmd):
     """create the console prompt"""
     prompt = "(hbnb) "
     model_classes = {
-            "BaseModel",
-            "Amenity",
-            "City",
-            "Place",
-            "Review",
-            "State",
-            "User"
+            "BaseModel": BaseModel,
+            "Amenity": Amenity,
+            "City": City,
+            "Place": Place,
+            "Review": Review,
+            "State": State,
+            "User": User
             }
 
     def __init__(self):
@@ -53,7 +53,7 @@ class HBNBConsole(cmd.Cmd):
             if class_name not in self.model_classes:
                 print("** class doesn't exist **")
                 return
-            class_obj = model_classes[class_name]
+            class_obj = self.model_classes[class_name]
             new_instance = class_obj()
             new_instance.save()
             print(new_instance.id)
@@ -86,7 +86,7 @@ class HBNBConsole(cmd.Cmd):
             print("** class name missing **")
             return
         class_name = args[0]
-        if class_name not in self.all_objects.keys():
+        if class_name not in self.model_classes:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
@@ -127,7 +127,7 @@ class HBNBConsole(cmd.Cmd):
             print("** value missing **")
             return
         class_name = args[0]
-        if class_name not in self.storage.classes.keys():
+        if class_name not in self.model_classes:
             print("** class doesn't exist **")
             return
         key = args[0] + "." + args[1]

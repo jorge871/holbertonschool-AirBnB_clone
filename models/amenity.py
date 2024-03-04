@@ -5,4 +5,4 @@ from models.base_model import BaseModel
 
 class Amenity(BaseModel):
     """create the class amenity"""
-    pass
+    name = ""

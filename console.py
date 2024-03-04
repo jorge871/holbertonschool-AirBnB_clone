@@ -10,6 +10,7 @@ from models.state import State
 from models.user import User
 from models.engine.file_storage import FileStorage
 from models import storage
+from shlex import split as sp
 
 
 class HBNBConsole(cmd.Cmd):
@@ -107,7 +108,7 @@ class HBNBConsole(cmd.Cmd):
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id"""
-        args = arg.split()
+        args = sp(arg)
         if len(args) == 0:
             print("** class name missing **")
             return
@@ -128,13 +129,13 @@ class HBNBConsole(cmd.Cmd):
         if key not in self.all_objects:
             print("** no instance found **")
             return
-        obj = self.all_objects[key]
+        obj = self.model_classes[key]
         attribute_name = args[2]
-        if hasattr(obj, attribute_name):
-            setattr(obj, attribute_name, args[3])
-            self.storage.save()
+        if args[2] == "my_number":
+            setattr(storage.all()[key], attribute_name, int(args[3]))
         else:
-            print("** attribute doesn't exist **")
+            setattr(storage.all()[key], attribute_name, args[3])
+        self.storage.save()
 
 
 if __name__ == "__main__":
